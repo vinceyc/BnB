@@ -84,7 +84,7 @@ contract('Property Token Contract Tests', function(accounts) {
 
   it('Alice should be able to approve the request.', async () => {
     try {
-      await propertyRegistry.approveRequest(ownedTokenId, {from: alice});
+      await propertyRegistry.approveRequest(ownedTokenId, bob, {from: alice});
     } catch(e) {
       console.log(e);
       assert(false, 'Alice could not approve the request.' + e);

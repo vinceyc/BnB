@@ -91,14 +91,13 @@ contract('Property Contract Tests', function(accounts) {
     assert(true, '');
   });
 
-  it('Eve should not be able to submit another request after Bob did', async () => {
+  it('With the changes to handle multiple requests, Eve should be able submit another request after Bob did', async () => {
     try {
       await propertyRegistry.request(ownedTokenId, 1542603516, 1543121916, {from: eve});
     } catch(e) {
-      assert(true, e);
+      assert(false, 'Eve could not submit another request. Error: ' + e);
       return;
     }
-    assert(false, 'Eve was able to submit another request.');
   });
 
   it('Bob can only check-in after Alice has approved and the approved time has come.', async () => {
@@ -113,7 +112,7 @@ contract('Property Contract Tests', function(accounts) {
 
   it('After Alice has approved the request, Bob can check-in.', async () => {
     try {
-      await propertyRegistry.approveRequest(ownedTokenId, {from: alice});
+      await propertyRegistry.approveRequest(ownedTokenId, bob, {from: alice});
       await propertyRegistry.checkIn(ownedTokenId, {from: bob});
     } catch(e) {
       assert(false, 'Bob was not able to check in after Alice approved the request.' + e);
