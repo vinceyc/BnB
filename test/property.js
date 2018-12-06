@@ -29,14 +29,16 @@ contract('Property Contract Tests', function(accounts) {
   });
 
   it('It should allow Alice to createProperty()', async () => {
-      let tx;
+      let response;
     try {
-        tx = await property.createProperty({from: alice});
+        response = await property.createProperty({from: alice});
+        console.log(response.logs[0].args);
     } catch(e) {
       assert(false, 'Alice could not use createProperty()');
       return;
     }
-    assert(true, 'Alice could use createProperty()');
+    assert.equal(response.receipt.status, '0x01', 'Transaction successful');
+    assert.equal(response.logs[0].event, 'Transfer', 'Event is a transfer');
   });
 
   let ownedTokenId;
@@ -130,7 +132,6 @@ contract('Property Contract Tests', function(accounts) {
     }
     assert(true, 'Eve was able to submit another request.');
   });
-
 
   // Bob can submit a request
   // Eve should not be able to submit another request after Bob did

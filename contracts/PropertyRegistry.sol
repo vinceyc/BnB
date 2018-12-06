@@ -80,10 +80,6 @@ contract PropertyRegistry {
         return (req.checkIn, req.checkOut, req.approved);
     }
 
-    function getProperties() external view returns(uint256[]) {
-        return ownedTokens[msg.sender];
-    }
-
     function getStayData(uint256 _tokenId) external view returns (uint256 _price, uint256 _stays, address _occupant) {
         Data memory data = stayData[_tokenId];
         return (data.price, data.stays, data.occupant);

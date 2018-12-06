@@ -116,7 +116,6 @@ contract('Property Token Contract Tests', function(accounts) {
   
   it('Verify Alice has been paid.', async () => {
     let postcheckInBalance = await propertyToken.balanceOf.call(alice);
-    propertyPrice
     assert.equal(postcheckInBalance.toNumber(), preCheckInBalance.toNumber() + propertyPrice, "Alice has been paid the property price");
   });
 

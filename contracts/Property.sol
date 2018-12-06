@@ -27,4 +27,8 @@ contract Property is ERC721Token {
   function createProperty() external {
     _mint(msg.sender, allTokens.length + 1);
   }
+
+  function getProperties() external view returns(uint256[]) {
+      return ownedTokens[msg.sender];
+  }
 }
